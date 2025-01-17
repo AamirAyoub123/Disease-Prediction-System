@@ -211,8 +211,113 @@ if(selected == 'Heart Disease Prediction'):
 if(selected == 'Parkinsons Prediction'):
     #Page Title 
     st.title("Parkinsons Prediction")    
+    
+    #Gitting the inpur data from the user 
+    col1, col2, col3, col4, col5 = st.columns(5)
 
+    with col1:
+        fo = st.text_input('MDVP:Fo(Hz)')
 
+    with col2:
+        fhi = st.text_input('MDVP:Fhi(Hz)')
+
+    with col3:
+        flo = st.text_input('MDVP:Flo(Hz)')
+
+    with col4:
+        Jitter_percent = st.text_input('MDVP:Jitter(%)')
+
+    with col5:
+        Jitter_Abs = st.text_input('MDVP:Jitter(Abs)')
+
+    with col1:
+        RAP = st.text_input('MDVP:RAP')
+
+    with col2:
+        PPQ = st.text_input('MDVP:PPQ')
+
+    with col3:
+        DDP = st.text_input('Jitter:DDP')
+
+    with col4:
+        Shimmer = st.text_input('MDVP:Shimmer')
+
+    with col5:
+        Shimmer_dB = st.text_input('MDVP:Shimmer(dB)')
+
+    with col1:
+        APQ3 = st.text_input('Shimmer:APQ3')
+
+    with col2:
+        APQ5 = st.text_input('Shimmer:APQ5')
+
+    with col3:
+        APQ = st.text_input('MDVP:APQ')
+
+    with col4:
+        DDA = st.text_input('Shimmer:DDA')
+
+    with col5:
+        NHR = st.text_input('NHR')
+
+    with col1:
+        HNR = st.text_input('HNR')
+
+    with col2:
+        RPDE = st.text_input('RPDE')
+
+    with col3:
+        DFA = st.text_input('DFA')
+
+    with col4:
+        spread1 = st.text_input('spread1')
+
+    with col5:
+        spread2 = st.text_input('spread2')
+
+    with col1:
+        D2 = st.text_input('D2')
+
+    with col2:
+        PPE = st.text_input('PPE')
+        
+    parkinsons_outcome=''
+    
+    input_data=[]
+    
+    #Create a button
+    if st.button('Parkinsons Disease Test'):
+        try:
+            # Validate inputs (ensure no empty fields)
+            inputs=[fo, fhi, flo, Jitter_percent, Jitter_Abs,
+                      RAP, PPQ, DDP,Shimmer, Shimmer_dB, APQ3, APQ5,
+                      APQ, DDA, NHR, HNR, RPDE, DFA, spread1, spread2, D2, PPE]
+            if any(value.strip() == '' for value in inputs):
+                st.error('All fields are required. Please fill in all the fields.')
+            else:    
+                # Convert inputs to floats and reshape for model
+                input_data = np.array([float(value) for value in inputs]).reshape(1,-1)
+                
+                # Standardize the input data
+                standardized_input_data = parkinsons_scaler.transform(input_data)
+                
+                # Make the prediction
+                parkinsons_prediction = parkinsons_model.predict(standardized_input_data)
+                
+                if parkinsons_prediction[0] == 1:
+                    parkinsons_outcome = "The person has Parkinson's disease"
+                else:
+                    parkinsons_outcome = "The person does not have Parkinson's disease"
+           
+        except ValueError:
+             st.error("Please ensure all inputs are numeric.")
+        except NameError:
+            st.error("Input data processing error. Please try again.")            
+    
+
+    st.success(parkinsons_outcome) 
+
+           
 #Breast Cancer Prediction Page 
 if(selected == 'Breast Cancer Prediction'):
     #Page Title 
