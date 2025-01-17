@@ -322,3 +322,178 @@ if(selected == 'Parkinsons Prediction'):
 if(selected == 'Breast Cancer Prediction'):
     #Page Title 
     st.title("Breast Cancer Prediction")    
+    
+     
+    #Gitting the inpur data from the user 
+    col1, col2, col3, col4, col5 = st.columns(5)
+
+    with col1:
+        id = st.text_input('id')
+
+    with col2:
+        radius_mean = st.text_input('radius_mean')
+
+    with col3:
+        texture_mean = st.text_input('texture_mean')
+
+    with col4:
+        perimeter_mean = st.text_input('perimeter_mean')
+
+    with col5:
+        area_mean = st.text_input('area_mean')
+
+    with col1:
+        smoothness_mean = st.text_input('smoothness_mean')
+
+    with col2:
+        compactness_mean = st.text_input('compactness_mean')
+
+    with col3:
+        concavity_mean = st.text_input('concavity_mean')
+
+    with col4:
+        concave_points_mean = st.text_input('concave points_mean')
+    
+    with col5:
+        symmetry_mean	 = st.text_input('symmetry_mean')    
+    
+    with col1:
+        fractal_dimension_mean	 = st.text_input('fractal_dimension_mean')
+
+    with col2:
+        radius_se = st.text_input('radius_se')
+
+    with col3:
+        texture_se = st.text_input('texture_se')
+
+    with col4:
+        perimeter_se = st.text_input('perimeter_se')
+
+    with col5:
+        area_se = st.text_input('area_se')
+
+    with col1:
+        smoothness_se = st.text_input('smoothness_se')
+
+    with col2:
+        compactness_se = st.text_input('compactness_se')
+
+    with col3:
+        concavity_se = st.text_input('concavity_se')
+
+    with col4:
+        concave_points_se = st.text_input('concave points_se')
+
+    with col5:
+        symmetry_se = st.text_input('symmetry_se')
+
+    with col1:
+        fractal_dimension_se = st.text_input('fractal_dimension_se')
+
+    with col2:
+        radius_worst = st.text_input('radius_worst')
+
+    with col3:
+        texture_worst = st.text_input('texture_worst')
+   
+    with col4:
+        perimeter_worst = st.text_input('perimeter_worst')
+
+    with col5:
+        area_worst = st.text_input('area_worst')
+
+    with col1:
+        smoothness_worst = st.text_input('smoothness_worst')
+    
+    with col2:
+        compactness_worst = st.text_input('compactness_worst')
+
+    with col3:
+        concavity_worst = st.text_input('concavity_worst')
+   
+    with col4:
+        concave_points_worst = st.text_input('concave points_worst')
+
+    with col5:
+        symmetry_worst = st.text_input('symmetry_worst')
+
+    with col1:
+        fractal_dimension_worst = st.text_input('fractal_dimension_worst')     
+    
+    # Map the inputs to their respective dataset column names
+    data = {
+        'id': id,
+        'radius_mean': radius_mean,
+        'texture_mean': texture_mean,
+        'perimeter_mean': perimeter_mean,
+        'area_mean': area_mean,
+        'smoothness_mean': smoothness_mean,
+        'compactness_mean': compactness_mean,
+        'concavity_mean': concavity_mean,
+        'concave points_mean': concave_points_mean,  # Map with the original column name
+        'symmetry_mean':symmetry_mean,
+        'fractal_dimension_mean': fractal_dimension_mean,
+        'radius_se': radius_se,
+        'texture_se': texture_se,
+        'perimeter_se': perimeter_se,
+        'area_se': area_se,
+        'smoothness_se': smoothness_se,
+        'compactness_se': compactness_se,
+        'concavity_se': concavity_se,
+        'concave points_se': concave_points_se,  # Map with the original column name
+        'symmetry_se': symmetry_se,
+        'fractal_dimension_se': fractal_dimension_se,
+        'radius_worst': radius_worst,
+        'texture_worst': texture_worst,
+        'perimeter_worst': perimeter_worst,
+        'area_worst': area_worst,
+        'smoothness_worst': smoothness_worst,
+        'compactness_worst': compactness_worst,
+        'concavity_worst': concavity_worst,
+        'concave points_worst': concave_points_worst,  # Map with the original column name
+        'symmetry_worst': symmetry_worst,
+        'fractal_dimension_worst': fractal_dimension_worst,
+        }     
+    
+    breastCancer_outcome=''
+    
+    input_data=[]
+    
+    #Create a button
+    if st.button('Breast Cancer Test'):
+        try:
+            # Validate inputs (ensure no empty fields)
+            inputs=[id,radius_mean, texture_mean, perimeter_mean, area_mean, smoothness_mean,
+                    compactness_mean,concavity_mean,concave_points_mean,symmetry_mean,fractal_dimension_mean,
+                    radius_se, texture_se, perimeter_se,area_se, smoothness_se, compactness_se,
+                    concavity_se, concave_points_se, symmetry_se,fractal_dimension_se,
+                    radius_worst, texture_worst, perimeter_worst,area_worst,smoothness_worst,compactness_worst,
+                   concavity_worst,concave_points_worst,symmetry_worst,fractal_dimension_worst]
+            
+            
+            if any(value.strip() == '' for value in inputs):
+                st.error('All fields are required. Please fill in all the fields.')
+            else:    
+                # Convert inputs to floats and reshape for model
+                input_data = np.array([float(value) for value in inputs]).reshape(1,-1)
+                
+                # Standardize the input data
+                standardized_input_data = breastCancer_scaler.transform(input_data)
+                
+                # Make the prediction
+                breastCancer_prediction =breastCancer_model.predict(standardized_input_data)
+                
+                if breastCancer_prediction[0] == 1:
+                    breastCancer_prediction = "The Breast Cancer is Benign"
+                else:
+                    breastCancer_prediction = "The Breast cancer is Malignant"
+           
+        except ValueError:
+             st.error("Please ensure all inputs are numeric.")
+        except NameError:
+            st.error("Input data processing error. Please try again.")            
+    
+
+    st.success(breastCancer_outcome)
+    
+    
