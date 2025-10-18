@@ -70,6 +70,7 @@ It leverages **machine learning models** with preprocessed medical datasets and 
 
 ---
 ## 🧩 Repository Structure
+```bash
 📁 DISEASE PREDICTION SYSTEM/
 │
 ├── 📊 Datasets/
@@ -102,6 +103,7 @@ It leverages **machine learning models** with preprocessed medical datasets and 
 │
 └── 📄 Documentation/
     └── README.md                    # Project documentation
+```
 ---
 ## ⚠️ Usage
 ```bash
@@ -116,17 +118,22 @@ pip install -r requirements.txt
 streamlit run src/multiple\ disease\ prediction.py
 ```
 ---
-##🧭 Navigate via the sidebar in the app
-    - Diabetes Prediction
-    - Heart Disease Prediction
-    - Parkinson’s Disease Prediction
-    - Breast Cancer Prediction
 
-## 👨‍💻 Author 
-**Ayoub Aamir** 
-🎓 **Master Big Data & IoT** 
-📍 *ENSAM Casablanca* 
-📧 [aamir.ayoub@ensam-casa.ma](mailto:aamir.ayoub@ensam-casa.ma) 
-🔗 **Connect with me:**
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ayoub-aamir) 
+## 🧭 Navigate via the sidebar in the app
+ 
+- **Diabetes Prediction**
+- **Heart Disease Prediction**
+- **Parkinson’s Disease Prediction**
+- **reast Cancer Prediction**
+---
+
+## 👨‍💻 Author
+**Ayoub Aamir**  
+
+🎓 **Master Big Data & IoT**  
+📍 *ENSAM Casablanca*  
+📧 [aamir.ayoub@ensam-casa.ma](mailto:aamir.ayoub@ensam-casa.ma)
+
+🔗 **Connect with me:**  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ayoub-aamir)  
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AamirAyoub123)
